@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/method-signature-style': 'error',
     '@typescript-eslint/no-import-type-side-effects': 'error',
+    '@typescript-eslint/no-inferrable-types': 'error',
     '@typescript-eslint/no-loop-func': 'error',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'error',
@@ -41,10 +42,12 @@ module.exports = {
     'no-return-await': 'off',
     '@typescript-eslint/return-await': 'error',
     '@typescript-eslint/sort-type-constituents': 'error',
-    '@typescript-eslint/strict-boolean-expressions': 'error',
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
 
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+
+    'unicorn/prevent-abbreviations': 'off',
   },
   overrides: [
     {

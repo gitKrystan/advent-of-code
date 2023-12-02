@@ -1,6 +1,6 @@
+import chalk from 'chalk';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import chalk from 'chalk';
 
 type SolutionFunction = (input: string) => number;
 

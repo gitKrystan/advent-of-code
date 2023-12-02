@@ -13,6 +13,7 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
+  ignore: ['**/*.cjs'],
   rules: {
     '@typescript-eslint/consistent-type-exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
@@ -49,13 +50,4 @@ module.exports = {
 
     'unicorn/prevent-abbreviations': 'off',
   },
-  overrides: [
-    {
-      files: ['*.cjs'],
-      env: {
-        node: true,
-      },
-      rules: {},
-    },
-  ],
 };

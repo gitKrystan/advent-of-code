@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import findCalibrationValue from './1b';
+import findCalibrationValue from './1b.js';
 
 const testInput1 = `
 1abc2

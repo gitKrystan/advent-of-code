@@ -94,7 +94,7 @@ describe('2023/3a', () => {
     expect(solution(two.join('\n'))).toBe(451490);
   });
 
-  test('Does this work', () => {
+  test('Finds gear ratio for really long number', () => {
     // prettier-ignore
     const two = [
       '......755.',
@@ -102,6 +102,26 @@ describe('2023/3a', () => {
       '..0000598.',
     ];
     expect(solution(two.join('\n'))).toBe(451490);
+  });
+
+  test('Finds multiple gears on same line', () => {
+    // prettier-ignore
+    const two = [
+      '12....12..',
+      '.*.....*..',
+      '..3.....3.',
+    ];
+    expect(solution(two.join('\n'))).toBe(72);
+  });
+
+  test('Zero cancels other gear ratio', () => {
+    // prettier-ignore
+    const one = [
+      '...123',
+      '..*...',
+      '.0....',
+    ];
+    expect(solution(one.join('\n'))).toBe(0);
   });
 
   test('Works for test input', () => {

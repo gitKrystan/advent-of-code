@@ -52,50 +52,60 @@ function isAdjacentNumber(
   );
 }
 
+function totalGearMatch(
+  gearMatch: RegExpMatchArray,
+  line: string,
+  prev: string | undefined,
+  next: string | undefined,
+) {
+  if (typeof gearMatch.index !== 'number') {
+    throw new Error(
+      `expected gearMatch.index to be a number, was ${gearMatch.index} for string ${line}`,
+    );
+  }
+
+  /*
+  0123456
+  ...*...
+    ^^^
+  123.123
+  */
+  const numberRangeStart = Math.max(gearMatch.index - 1, 0);
+  const numberRangeEnd = Math.min(gearMatch.index + 1, line.length);
+
+  let firstAdjacent: number | null = null;
+  let secondAdjacent: number | null = null;
+
+  for (let numberMatch of [
+    ...line.matchAll(NUMBER_REGEXP),
+    ...(prev?.matchAll(NUMBER_REGEXP) ?? []),
+    ...(next?.matchAll(NUMBER_REGEXP) ?? []),
+  ]) {
+    debugger;
+    if (isAdjacentNumber(numberMatch, numberRangeStart, numberRangeEnd)) {
+      if (firstAdjacent === null) {
+        firstAdjacent = Number(numberMatch[0]);
+      } else if (secondAdjacent === null) {
+        secondAdjacent = Number(numberMatch[0]);
+      } else {
+        return 0;
+      }
+    }
+  }
+  return (firstAdjacent ?? 0) * (secondAdjacent ?? 0);
+}
+
 function totalCurrentLine(
   line: string,
   prev: string | undefined,
   next: string | undefined,
 ) {
+  let total = 0;
   for (let gearMatch of line.matchAll(GEAR_REGEXP)) {
-    if (typeof gearMatch.index !== 'number') {
-      throw new Error(
-        `expected gearMatch.index to be a number, was ${gearMatch.index} for string ${line}`,
-      );
-    }
-
-    /*
-    0123456
-    ...*...
-      ^^^
-    123.123
-    */
-    const numberRangeStart = Math.max(gearMatch.index - 1, 0);
-    const numberRangeEnd = Math.min(gearMatch.index + 1, line.length);
-
-    let firstAdjacent = 0;
-    let secondAdjacent = 0;
-
-    for (let numberMatch of [
-      ...line.matchAll(NUMBER_REGEXP),
-      ...(prev?.matchAll(NUMBER_REGEXP) ?? []),
-      ...(next?.matchAll(NUMBER_REGEXP) ?? []),
-    ]) {
-      if (isAdjacentNumber(numberMatch, numberRangeStart, numberRangeEnd)) {
-        if (firstAdjacent === 0) {
-          firstAdjacent = Number(numberMatch[0]);
-        } else if (secondAdjacent === 0) {
-          secondAdjacent = Number(numberMatch[0]);
-        } else {
-          return 0;
-        }
-      }
-    }
-
-    return firstAdjacent * secondAdjacent;
+    total += totalGearMatch(gearMatch, line, prev, next);
   }
 
-  return 0;
+  return total;
 }
 
 function verifyLineExists(line: string | undefined): string {

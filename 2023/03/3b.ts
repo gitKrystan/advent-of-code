@@ -81,7 +81,6 @@ function totalGearMatch(
     ...(prev?.matchAll(NUMBER_REGEXP) ?? []),
     ...(next?.matchAll(NUMBER_REGEXP) ?? []),
   ]) {
-    debugger;
     if (isAdjacentNumber(numberMatch, numberRangeStart, numberRangeEnd)) {
       if (firstAdjacent === null) {
         firstAdjacent = Number(numberMatch[0]);

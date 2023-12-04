@@ -31,16 +31,6 @@ Of course, the actual engine schematic is much larger. What is the sum of all of
 
 */
 
-/*
-
-[
-  012345,
-  012345,
-  012345,
-]
-
-*/
-
 const NUMBER_REGEXP = /\d+/g;
 const SYMBOL_REGEXP = /[^.\d]/g;
 
